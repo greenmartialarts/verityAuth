@@ -120,7 +120,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_state(state);
 
     // Run axum server
-    let addr = SocketAddr::from(([0, 0, 0, 0], 8080));
+    // Render (and most PaaS platforms) inject a PORT env var — bind to it.
+    // Fall back to 8080 for local development.
+    let port: u16 = std::env::var("PORT")
+        .ok()
+        .and_then(|p| p.parse().ok())
+        .unwrap_or(8080);
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
     tracing::info!("Listening on {}", addr);
     
     let listener = tokio::net::TcpListener::bind(addr).await?;
