@@ -1,0 +1,24 @@
+[package]
+name = "auth-service"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.38", features = ["full"] }
+axum = { version = "0.7.5", features = ["macros"] }
+sqlx = { version = "0.8.0", features = ["runtime-tokio", "tls-rustls", "postgres", "uuid", "chrono"] }
+argon2 = { version = "0.5.3", features = ["std"] }
+jsonwebtoken = { version = "9.3.0", features = ["use_pem"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.8", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+validator = { version = "0.18", features = ["derive"] }
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+rand = "0.8"
+sha2 = "0.10"
+hex = "0.4"
+base64 = "0.22"
